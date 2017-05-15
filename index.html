@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>对话框</title>
+	<style type="text/css">
+		.wrap{
+			width: 300px;
+			height: 500px;
+			border-radius: 50px;
+			border: 2px solid #eee;
+			background: #f6f6f6;
+			position: absolute;
+			left: calc(50% - 150px);
+			top: calc(50% - 100px);
+		}
+		.box{
+			width: 250px;
+			height: 400px;
+			position: absolute;
+			left: 20px;
+			top: 30px;
+			border: 1px solid #ddd;
+		}
+		.wrap_box{
+			width: 250px;
+			height: 350px;
+			resize: none;
+		}
+		.list{
+			width: 250px;
+			height: 350px;
+			border: none;
+			list-style: none;
+		}
+		.item{
+			height: 30px;
+		}
+		.img{
+			width: 250px;
+			height: 40px;
+			background: #ccc;
+			padding-top: 10px;
+		}
+		.icon{
+			width: 25px;
+			height: 25px;
+			margin-top: 5px;
+			float: left;
+			margin-right: 5px;
+			border-radius: 15px;
+		}
+		.text{
+			width: 160px;
+			height: 30px;
+		}
+	</style>
+</head>
+<body>
+
+	<div class="wrap">
+		<div class="box">
+			<div class="wrap_box">
+				<ul class="list">
+				</ul>
+			</div>
+			<div class="img">
+				<img src="img/icon1.png" class="icon">
+				<input type="text" class="text"/>
+				<input type="button" class="btn" value="按钮"/>
+			</div>	
+		</div>
+		
+	</div>
+	<script>
+		// 获取到ul,按钮，头像icon，文本框元素
+		var list = document.querySelector('.list');
+		var btn = document.querySelector('.btn');
+		var icon = document.querySelector('.icon');
+		var text = document.querySelector('.text');
+		// 声明变量
+		var flag = true;
+		// 点击头像时
+		icon.onclick = function (){
+			// 如果是真的时候，头像是icon1在，否则是icon，如果在切换时让图片变为icon时，要把
+			// icon1变为假，把icon变为真
+			/*img不可以做为判断条件，img获取到是绝对路径
+			*/
+			if(flag){
+				icon.src='img/icon1.png';
+				flag = false;
+			}else{
+				icon.src='img/icon.png';
+				flag = true;
+			}
+		}
+		/*点击按钮时，如果文本框是空时，弹出一个对话框，否则如果是假时，icon里的图片是icon1，
+			list里的内容是li加上头像icon1加上文本框的内容，否则头像是icon，list里的内容是li加上头像icon加上文本框的内容
+		*/
+		btn.onclick = function (){
+			var val = text.value;
+			if(val==''){
+				alert('请输入内容')
+			}else{
+				if(!flag){
+					icon.src='img/icon1.png';
+					list.innerHTML += '<li class="item"><img src="img/icon1.png" class="icon">'+text.value+'</li>';
+				}else{
+					icon.src='img/icon.png';
+					list.innerHTML += '<li class="item"><img src="img/icon.png" class="icon">'+text.value+'</li>';
+				}
+
+			}
+
+		}
+	</script>
+</body>
+</html>
